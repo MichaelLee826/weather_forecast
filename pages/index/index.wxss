@@ -1,0 +1,119 @@
+/**index.wxss**/
+.content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: 微软雅黑,宋体;
+  box-sizing: border-box;
+  padding: 20rpx 10rpx;
+  color: #252525;
+  font-size: 16px;
+  background-color: #F2F2F8
+}
+
+/*当日天气*/
+.info {
+  margin-top: 50rpx;
+  width: 100%;
+  height: 160px;
+}
+
+/*城市名称*/
+.city {
+  margin: 20rpx;
+  border-bottom: 1px solid #043567;
+}
+
+/*当日温度*/
+.temp {
+  font-size: 120rpx;
+  line-height: 130rpx;
+  text-align: center;
+  padding-top: 20rpx;
+  color: #043567;
+}
+
+/*当日温度*/
+.temp {
+  font-size: 120rpx;
+  line-height: 130rpx;
+  text-align: center;
+  padding-top: 20rpx;
+  color: #043567;
+}
+
+/*感冒描述*/
+.weather {
+  line-height: 22px;
+  margin: 10px 0;
+  padding: 0 10px;
+}
+
+/*昨日天气*/
+.yesterday {
+  width: 93%;
+  padding: 20rpx;
+  margin-top: 50rpx;
+  border-radius: 10rpx;
+  border: 1px solid #043567;
+}
+
+/*昨天的*/
+.yesterday-title {
+  color: red;
+}
+
+/*最近5天天气*/
+.forecast {
+  width: 100%;
+  display: flex;
+  margin-top: 50rpx;
+  align-self: flex-end;
+}
+
+/*每一天的天气*/
+.next-day {
+  width: 19%;
+  height: 450rpx;
+  text-align: center;
+  line-height: 30px;
+  font-size: 14px;
+  margin: 0 3rpx;
+  border: 1px solid #043567;
+  border-radius: 10rpx;
+}
+
+/*日期*/
+.date {
+  margin-bottom: 20rpx;
+  border-bottom: 1px solid #043567;
+  color: #F29F39;
+}
+
+/*搜索区域*/
+.search-area {
+  display: flex;
+  background: #F4F4F4;
+  padding: 1rem 0.5rem;
+}
+
+/*输入框*/
+.search-area input {
+  width: 70%;
+  height: 38px;
+  line-height: 38px;
+  border: 1px solid #CCC;
+  box-shadow: inset 0 0 10px #CCC;
+  color: #000;
+  background-color: #FFF;
+  border-radius: 5px;
+}
+
+/*按钮*/
+.search-area button {
+  width: 30%;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 5px;
+}

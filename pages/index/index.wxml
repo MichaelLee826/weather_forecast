@@ -1,0 +1,44 @@
+<!--index.wxml-->
+<view class="content">
+  <!--当日天气-->
+  <view class="info">
+    <view class='city'>{{city}} ({{today}})</view>
+    <view class='temp'>{{weather.wendu}}℃</view>
+    <view class='weather'>{{weather.ganmao}}</view>
+  </view>
+
+  <!--今日天气-->
+  <view class='yesterday'>
+    <view class='detail'>
+      <text class='yesterday-title'>今天：</text>
+      <!--{{weather.yesterday.date}}-->
+      {{date}}
+
+    </view>
+    <view class='detail'>
+      {{weather.yesterday.type}}
+      {{weather.yesterday.fx}}
+      {{weather.yesterday.fl}}
+      {{weather.yesterday.low}}
+      {{weather.yesterday.high}}
+    </view>
+  </view>
+
+  <!--最近5天天气-->
+  <view class='forecast'>
+    <view class='next-day' wx:key="{{index}}" wx:for="{{weather.forecast}}"> 
+      <view class='detail date'>{{item.date}}</view>
+      <view class='detail'>{{item.type}}</view>
+      <view class='detail'>{{item.high}}</view>
+      <view class='detail'>{{item.low}}</view>
+      <view class='detail'>{{item.fengxiang}}</view>
+      <view class='detail'>{{item.fengli}}</view>
+    </view>
+  </view>
+
+  <!--搜索-->
+  <view class='search-area'>
+    <input bindinput='inputing' placeholder='请输入城市名称' value='{{inputCity}}'></input>
+    <button type='primary' size='mini' bindtap='bindSearch'>查询</button>
+  </view>
+</view>
