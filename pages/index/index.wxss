@@ -22,10 +22,9 @@
 /*城市名称*/
 .city {
   margin: 20rpx;
-  border-bottom: 1px solid #043567;
 }
 
-/*当日温度*/
+/*实时温度*/
 .temp {
   font-size: 120rpx;
   line-height: 130rpx;
@@ -34,37 +33,39 @@
   color: #043567;
 }
 
-/*当日温度*/
-.temp {
-  font-size: 120rpx;
-  line-height: 130rpx;
+/*实时温度文字*/
+.realtime {
   text-align: center;
-  padding-top: 20rpx;
-  color: #043567;
+  padding-top:5rpx;
+}
+
+/*今日天气*/
+.today {
+  width: 95%;
+  padding: 10rpx;
+  margin-top: 30rpx;
+  border-radius: 10rpx;
+  border: 1px solid #043567;
+}
+
+/*今天的*/
+.today-title {
+  color: red;
+}
+
+/*感冒提醒文字*/
+.ganmao {
+  color: red;
+  margin: 5px 0;
 }
 
 /*感冒描述*/
 .weather {
   line-height: 22px;
-  margin: 10px 0;
-  padding: 0 10px;
+  margin: 5px 0;
 }
 
-/*昨日天气*/
-.yesterday {
-  width: 93%;
-  padding: 20rpx;
-  margin-top: 50rpx;
-  border-radius: 10rpx;
-  border: 1px solid #043567;
-}
-
-/*昨天的*/
-.yesterday-title {
-  color: red;
-}
-
-/*最近5天天气*/
+/*最近4天天气*/
 .forecast {
   width: 100%;
   display: flex;
@@ -74,7 +75,7 @@
 
 /*每一天的天气*/
 .next-day {
-  width: 19%;
+  width: 24%;
   height: 450rpx;
   text-align: center;
   line-height: 30px;

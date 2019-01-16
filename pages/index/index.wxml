@@ -2,31 +2,32 @@
 <view class="content">
   <!--当日天气-->
   <view class="info">
-    <view class='city'>{{city}} ({{today}})</view>
+    <view class='city'>当前城市：{{city}}</view>
     <view class='temp'>{{weather.wendu}}℃</view>
-    <view class='weather'>{{weather.ganmao}}</view>
+    <view class='realtime'>(实时温度)</view>
   </view>
 
   <!--今日天气-->
-  <view class='yesterday'>
+  <view class='today'>
     <view class='detail'>
-      <text class='yesterday-title'>今天：</text>
-      <!--{{weather.yesterday.date}}-->
-      {{date}}
-
+      <text class='today-title'>今日天气({{date}})：</text>
     </view>
     <view class='detail'>
-      {{weather.yesterday.type}}
-      {{weather.yesterday.fx}}
-      {{weather.yesterday.fl}}
-      {{weather.yesterday.low}}
-      {{weather.yesterday.high}}
+      {{today.type}}
+      {{today.fengxiang}}
+      {{today.fengli}}
+      {{today.low}}
+      {{today.high}}
+    </view>
+    <view class='ganmao'>感冒提醒：</view>
+    <view>
+      <view class='weather'>{{weather.ganmao}}</view>
     </view>
   </view>
 
   <!--最近5天天气-->
   <view class='forecast'>
-    <view class='next-day' wx:key="{{index}}" wx:for="{{weather.forecast}}"> 
+    <view class='next-day' wx:key="{{index}}" wx:for="{{forecast}}"> 
       <view class='detail date'>{{item.date}}</view>
       <view class='detail'>{{item.type}}</view>
       <view class='detail'>{{item.high}}</view>

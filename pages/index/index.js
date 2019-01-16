@@ -21,6 +21,7 @@ Page({
     return fl;
   },
 
+  //日期显示
   getDate:function(){
     var date = new Date();
     var seperator = "-";
@@ -37,6 +38,7 @@ Page({
     return currentdate;
   },
 
+  //查询天气
   searchWeather:function(){
     var self = this;
     var cityName = '青岛';
@@ -60,14 +62,21 @@ Page({
           })
         }
         else{
+          //获得“中华万年历”的天气预报返回结果
           var weather = result.data.data;
           console.log(weather);
 
           //获得今天的日期
           var date = self.getDate();
 
-          //显示yesterday风力
-          weather.yesterday.fl = self.flDisplay(weather.yesterday.fl);
+          //获得今日的天气（forecast数组中的第1个）
+          var weather_today = weather.forecast[0];
+
+          //获得未来四天的天气(forecast数组中的第2到第5个)
+          var forecast = new Array();
+          for(var i = 0; i < 4; i++){
+            forecast[i] = weather.forecast[i + 1];
+          }
 
           for (var i = 0; i < weather.forecast.length; i++) {
             weather.forecast[i].date = '  ' + weather.forecast[i].date.replace('星期', ' 周');
@@ -75,6 +84,8 @@ Page({
           }          
 
           self.setData({
+            today:weather_today,
+            forecast:forecast,
             date:date,
             city:cityName,
             weather:weather,
