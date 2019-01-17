@@ -43,7 +43,7 @@
 .today {
   width: 95%;
   padding: 10rpx;
-  margin-top: 30rpx;
+  margin: 30rpx 10rpx;
   border-radius: 10rpx;
   border: 1px solid #043567;
 }
@@ -65,18 +65,18 @@
   margin: 5px 0;
 }
 
-/*最近4天天气*/
+/*最近3天天气*/
 .forecast {
-  width: 100%;
+  width: 95%;
   display: flex;
-  margin-top: 50rpx;
+  margin-top: 30rpx;
   align-self: flex-end;
 }
 
 /*每一天的天气*/
 .next-day {
-  width: 24%;
-  height: 450rpx;
+  width: 30%;
+  height: 300rpx;
   text-align: center;
   line-height: 30px;
   font-size: 14px;

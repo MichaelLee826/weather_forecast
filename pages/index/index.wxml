@@ -2,8 +2,8 @@
 <view class="content">
   <!--当日天气-->
   <view class="info">
-    <view class='city'>当前城市：{{city}}</view>
-    <view class='temp'>{{weather.wendu}}℃</view>
+    <view class='city'>当前城市：{{currentWeather.currentCity}}</view>
+    <view class='temp'>{{currentWeather.date}}℃</view>
     <view class='realtime'>(实时温度)</view>
   </view>
 
@@ -13,27 +13,24 @@
       <text class='today-title'>今日天气({{date}})：</text>
     </view>
     <view class='detail'>
-      {{today.type}}
-      {{today.fengxiang}}
-      {{today.fengli}}
-      {{today.low}}
-      {{today.high}}
+      {{currentWeather.weatherDesc}}
+      {{currentWeather.wind}}
+      温度：{{currentWeather.temperature}}
+      空气指数：{{currentWeather.pm25}}
     </view>
     <view class='ganmao'>感冒提醒：</view>
     <view>
-      <view class='weather'>{{weather.ganmao}}</view>
+      <view class='weather'>{{ganmao.des}}</view>
     </view>
   </view>
 
-  <!--最近5天天气-->
+  <!--最近3天天气-->
   <view class='forecast'>
     <view class='next-day' wx:key="{{index}}" wx:for="{{forecast}}"> 
       <view class='detail date'>{{item.date}}</view>
-      <view class='detail'>{{item.type}}</view>
-      <view class='detail'>{{item.high}}</view>
-      <view class='detail'>{{item.low}}</view>
-      <view class='detail'>{{item.fengxiang}}</view>
-      <view class='detail'>{{item.fengli}}</view>
+      <view class='detail'>{{item.weather}}</view>
+      <view class='detail'>{{item.temperature}}</view>
+      <view class='detail'>{{item.wind}}</view>
     </view>
   </view>
 
