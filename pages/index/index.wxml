@@ -1,27 +1,23 @@
 <!--index.wxml-->
 <view class="content">
+  <image class='background' src="../../pics/background.jpg" mode="aspectFill"></image>
   <!--当日天气-->
   <view class="info">
-    <view class='city'>当前城市：{{currentWeather.currentCity}}</view>
-    <view class='temp'>{{currentWeather.date}}℃</view>
-    <view class='realtime'>(实时温度)</view>
-  </view>
-
-  <!--今日天气-->
-  <view class='today'>
-    <view class='detail'>
-      <text class='today-title'>今日天气({{date}})：</text>
+    <view class='city'>
+	  <view class='cityName'>当前城市：{{currentWeather.currentCity}}</view>
+    <view class='currentDate'>{{currentDate}}</view>
+	  </view>
+    <view class='temp'>
+      <view class='currentTemp'>{{currentWeather.date}}</view>
+      <view class = 'temp_right'>
+        <view class='celsius'>℃</view>
+        <view class='realtime'>(实时)</view>
+      </view>
     </view>
-    <view class='detail'>
-      {{currentWeather.weatherDesc}}
-      {{currentWeather.wind}}
-      温度：{{currentWeather.temperature}}
-      空气指数：{{currentWeather.pm25}}
-    </view>
-    <view class='ganmao'>感冒提醒：</view>
-    <view>
-      <view class='weather'>{{ganmao.des}}</view>
-    </view>
+    <view class='tempRange'>{{currentWeather.temperature}}</view>
+    <view class='type'>{{currentWeather.weatherDesc}}</view>
+    <view class='wind'>{{currentWeather.wind}}</view>
+    <view class='air'>空气质量：{{currentWeather.pm25}}</view>
   </view>
 
   <!--最近3天天气-->
@@ -34,9 +30,11 @@
     </view>
   </view>
 
-  <!--搜索-->
-  <view class='search-area'>
-    <input bindinput='inputing' placeholder='请输入城市名称' value='{{inputCity}}'></input>
-    <button type='primary' size='mini' bindtap='bindSearch'>查询</button>
+  <!--提醒-->
+  <view class='tips'>   
+    <view class='ganmao'>感冒提醒：</view>
+    <view>
+      <view class='weather'>{{ganmao.des}}</view>
+    </view>
   </view>
 </view>
