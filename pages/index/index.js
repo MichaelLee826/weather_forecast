@@ -58,20 +58,26 @@ Page({
     //判断空气质量等级
     var pm25 = currentWeather.pm25;
     var airClass = "";
+    var airColor = "";
     if(pm25 <= 50){
       airClass = "优";
+      airColor = "";
     }
 	  else if (pm25 > 50 && pm25 <= 100){
       airClass = "良";
     }
-    else if (pm25 > 100 && pm25 <= 200) {
+    else if (pm25 >100 && pm25 <= 150){
       airClass = "轻度污染";
+      airColor = "#FF8C00";
     }
-    else if (pm25 > 200 && pm25 <= 300) {
+    else if (pm25 > 150 && pm25 <= 200) {
       airClass = "中度污染";
     }
-    else {
+    else if (pm25 > 200 && pm25 <= 300) {
       airClass = "重度污染";
+    }
+    else {
+      airClass = "严重污染";
     }
 
 		//第2部分数据示例
@@ -116,7 +122,10 @@ Page({
       forecast[i].iconURL = that.getIconURL(forecast[i].weather);
       //调整温度范围显示
       forecast[i].temperature = that.tempSwitch(forecast[i].temperature);
-        }
+      //调整风向和风速显示，如果没有风速，则风速为空
+      forecast[i].windDeriction = that.getWindDeriction(forecast[i].wind);
+      forecast[i].windSpeed = that.getWindSpeed(forecast[i].wind);
+      }
       
 		//配置数据
 		that.setData({
@@ -124,8 +133,12 @@ Page({
 		  currentWeather: currentWeather,
 			currentDate: currentDate,
       airClass: airClass,
+      airColor: airColor,
 		  forecast: forecast,
 		  ganmao: ganmao,
+      yundong: yundong,
+      ziwaixian: ziwaixian,
+      xiche: xiche
 		});
     }
     // 发起weather请求 
@@ -256,5 +269,52 @@ Page({
       url = "../../pics/unknown.png";
     }
     return url;
+  },
+
+  //获得风向
+  getWindDeriction: function (wind) {
+    var result = "";
+    var index = this.seperateWind(wind);
+    //信息中不包含风速，风向为全部信息
+    if (index == -1){
+      result = wind;
+    }
+    //信息中包含风速，截取出风向
+    else{
+      result = wind.substring(0, index);
+    }
+    return result;
+  },
+
+  //获得风速
+  getWindSpeed: function (wind) {
+    var result = "";
+    var index = this.seperateWind(wind);
+    //信息中不包含风速，风速为空
+    if (index == -1) {
+      result = "";
+    }
+    //信息中包含风速，截取出风速
+    else {
+      result = wind.substring(index, wind.length);
+    }
+    return result;
+  },
+
+  //将风向和风力分开，获得分隔的索引值
+  seperateWind: function(wind){
+    var numPattern = /[0-9]/;
+    var result = "";
+    if(numPattern.test(wind)){
+      //风力信息中包含数字
+      var pattern = new RegExp("[0-9]+");
+      var res = wind.match(pattern);
+      result = res.index;
+    }
+    else{
+      //风力信息中不包含数字
+      result = -1;
+    }
+    return result;
   }
 })

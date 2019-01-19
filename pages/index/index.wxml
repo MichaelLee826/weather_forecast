@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <view class="content">
+  <scroll-view scroll-y='true' enable-back-to-top='true'>
   <image class='background' src="../../pics/background.jpg" mode="aspectFill"></image>
   <!--当日天气-->
   <view class="info">
@@ -7,7 +8,6 @@
 	  <view class='cityName'>{{currentWeather.currentCity}}</view>
     <view class='currentDate'>{{currentDate}}</view>
 	  </view>
-    <image class='weatherIcon' src='{{iconURL}}' mode="Widthfix"></image>
     <view class='temp'>
       <view class='currentTemp'>{{currentWeather.date}}</view>
       <view class = 'temp_right'>
@@ -15,10 +15,12 @@
         <view class='realtime'>(实时)</view>
       </view>
     </view>
-    <view class='tempRange'>{{currentWeather.temperature}}</view>
+
+    <image class='weatherIcon' src='{{iconURL}}' mode="Widthfix"></image>
     <view class='type'>{{currentWeather.weatherDesc}}</view>
+    <view class='tempRange'>{{currentWeather.temperature}}</view>
     <view class='wind'>{{currentWeather.wind}}</view>
-    <view class='air'>{{currentWeather.pm25}}  {{airClass}}</view>
+    <view class='air' style="background:{{airColor}}; border:{{airColor}}">{{currentWeather.pm25}}  {{airClass}}</view>
   </view>
 
   <!--最近3天天气-->
@@ -28,15 +30,41 @@
       <image class='forecastIcon' src='{{item.iconURL}}' mode="Widthfix"></image>
       <view class='detail'>{{item.weather}}</view>
       <view class='detail'>{{item.temperature}}</view>
-      <view class='detail'>{{item.wind}}</view>
+      <view class='detail'>{{item.windDeriction}}</view>
+      <view class='detail'>{{item.windSpeed}}</view>
     </view>
   </view>
 
-  <!--提醒-->
+  <!--感冒指数-->
   <view class='tips'>   
-    <view class='ganmao'>感冒提醒：</view>
+    <view class='index'>感冒指数：{{ganmao.zs}}</view>
     <view>
-      <view class='weather'>{{ganmao.des}}</view>
+      <view class='description'>{{ganmao.des}}</view>
     </view>
   </view>
+
+  <!--运动指数-->
+  <view class='tips'>   
+    <view class='index'>运动指数：{{yundong.zs}}</view>
+    <view>
+      <view class='description'>{{yundong.des}}</view>
+    </view>
+  </view>
+
+  <!--紫外线指数-->
+  <view class='tips'>   
+    <view class='index'>紫外线指数：{{ziwaixian.zs}}</view>
+    <view>
+      <view class='description'>{{ziwaixian.des}}</view>
+    </view>
+  </view>
+
+  <!--洗车指数-->
+  <view class='tips'>   
+    <view class='index'>洗车指数：{{xiche.zs}}</view>
+    <view>
+      <view class='description'>{{xiche.des}}</view>
+    </view>
+  </view>
+  </scroll-view>
 </view>
