@@ -11,7 +11,7 @@ page{
   font-family: 微软雅黑,宋体;
   box-sizing: border-box;
   color: #FFFFFF;
-  font-size: 16px;
+  font-size: 17px;
   background-size:100% 100%
   /*background-color: #F2F2F8*/
 }
@@ -42,17 +42,33 @@ page{
 .cityName {
   position: relative;
   display:inline-block;
-  padding-left: 10rpx;
+  padding-left: 30rpx;
 }
 
 /*日期*/
 .currentDate {
   position: relative;
   float: right;
-  padding-right: 10rpx
+  padding-right: 30rpx
 }
 
+/**天气图标块**/
+
+
+/**天气图标**/
+.weatherIcon {
+  margin: 0 auto;  
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  width: 161rpx;
+  height: 161rpx;
+  border-radius: 50%;
+}
+
+/*实时温度块*/
 .temp {
+  margin-bottom: 20rpx;
   text-align: center;
 }
 
@@ -120,21 +136,32 @@ page{
 
 /*最近3天天气*/
 .forecast {
-  width: 98%;
+  width: 100%;
   display: flex;
-  margin-top: 100rpx;
+  margin-top: 300rpx;
   align-self: flex-end;
   padding-bottom: 30rpx;
   font-weight: bold;
 }
 
+/*最近3天天气图标*/
+.forecastIcon {
+  margin: 0 auto;  
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  width: 100rpx;
+  height: 100rpx;
+  
+}
+
 /*每一天的天气*/
 .next-day {
   width: 30%;
-  height: 300rpx;
+  height: 400rpx;
   text-align: center;
   line-height: 30px;
-  font-size: 14px;
+  font-size: 16px;
   margin: 0 10rpx;
   border: 1px solid #043567;
   border-radius: 10rpx;
