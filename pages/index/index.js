@@ -43,6 +43,9 @@ Page({
     //currentWeather.weatherDesc："晴"
     //currentWeather.wind："南风微风"
 		
+    //获得天气图标URL
+    var iconURL = that.getIconURL(currentWeather.weatherDesc);
+
 		//截取出实时温度数据
     var begin = currentWeather.date.indexOf("时");
     var end = currentWeather.date.indexOf(")");
@@ -51,7 +54,26 @@ Page({
       
 		//调整温度范围显示
 		currentWeather.temperature = that.tempSwitch(currentWeather.temperature);
-	  
+
+    //判断空气质量等级
+    var pm25 = currentWeather.pm25;
+    var airClass = "";
+    if(pm25 <= 50){
+      airClass = "优";
+    }
+	  else if (pm25 > 50 && pm25 <= 100){
+      airClass = "良";
+    }
+    else if (pm25 > 100 && pm25 <= 200) {
+      airClass = "轻度污染";
+    }
+    else if (pm25 > 200 && pm25 <= 300) {
+      airClass = "中度污染";
+    }
+    else {
+      airClass = "重度污染";
+    }
+
 		//第2部分数据示例
 		var tipsArray = new Array(5);
 		tipsArray = data.originalData.results[0].index;
@@ -90,16 +112,20 @@ Page({
 			forecast[i] = forecastArray[i + 1];
       //调整日期显示
       forecast[i].date = that.getForecatDate(i, forecast[i].date);
+      //获得天气图标URL
+      forecast[i].iconURL = that.getIconURL(forecast[i].weather);
       //调整温度范围显示
       forecast[i].temperature = that.tempSwitch(forecast[i].temperature);
         }
       
 		//配置数据
 		that.setData({
-		    currentWeather: currentWeather,
-			  currentDate: currentDate,
-		    forecast: forecast,
-		    ganmao: ganmao,
+      iconURL: iconURL,
+		  currentWeather: currentWeather,
+			currentDate: currentDate,
+      airClass: airClass,
+		  forecast: forecast,
+		  ganmao: ganmao,
 		});
     }
     // 发起weather请求 
@@ -162,5 +188,73 @@ Page({
 		result = low + " ~ " + high + "℃";
 	
 		return result;
-	}
+	},
+
+  //天气图标路径
+  getIconURL: function (weatherDesc){
+    var condition = String(weatherDesc);
+    var url = "";
+    if (condition.includes("转")){
+      condition = condition.substring(0, condition.indexOf("转"));
+    }
+
+    if (condition.includes("晴")) {
+      url = "../../pics/sunny.png";
+    }
+    else if (condition.includes("多云")) {
+      url = "../../pics/partly_cloudy.png";
+    }
+    else if (condition.includes("阴")) {
+      url = "../../pics/cloudy.png";
+    }
+    else if (condition.includes("阵雨")) {
+      url = "../../pics/shower.png";
+    }
+    else if (condition.includes("雷阵雨")) {
+      url = "../../pics/stormy_rain.png";
+    }
+    else if (condition.includes("雨夹雪")) {
+      url = "../../pics/snow_rain.png";
+    }
+    else if (condition.includes("小雨")) {
+      url = "../../pics/light_rain.png";
+    }
+    else if (condition.includes("中雨")) {
+      url = "../../pics/moderate_rain.png";
+    }
+    else if (condition.includes("大雨")) {
+      url = "../../pics/heavy_rain.png";
+    }
+    else if (condition.includes("暴雨")) {
+      url = "../../pics/rainstorm.png";
+    }
+    else if (condition.includes("阵雪")) {
+      url = "../../pics/shower_snow.png";
+    }
+    else if (condition.includes("小雪")) {
+      url = "../../pics/light_snow.png";
+    }
+    else if (condition.includes("中雪")) {
+      url = "../../pics/moderate_snow.png";
+    }
+    else if (condition.includes("大雪")) {
+      url = "../../pics/heavy_snow.png";
+    }
+    else if (condition.includes("暴雪")) {
+      url = "../../pics/snow_storm.png";
+    }
+    else if (condition.includes("雾")) {
+      url = "../../pics/fog.png";
+    }
+    else if (condition.includes("霾")) {
+      url = "../../pics/haze.png";
+    }
+    else if (condition.includes("沙尘暴")) {
+      url = "../../pics/dust_storm.png";
+    }
+    else {
+      url = "../../pics/unknown.png";
+    }
+    return url;
+  }
 })
