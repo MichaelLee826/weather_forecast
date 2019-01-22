@@ -16,6 +16,7 @@ page{
   /*background-color: #F2F2F8*/
 }
 
+
 /**背景图片**/
 .background {
   width: 100%;
@@ -69,6 +70,7 @@ page{
   color: #FFFFFF;
 }
 
+/*实时温度右侧部分*/
 .temp_right {
   position: relative;
   display: inline-block;
@@ -183,7 +185,7 @@ page{
   padding: 10rpx;
   margin: 30rpx auto;
   border-radius: 10rpx;
-  border: 1px solid #043567;
+  border: 2px solid #043567;
   box-shadow: 10px 10px 5px #888888;
 }
 
@@ -202,26 +204,29 @@ page{
 /*搜索区域*/
 .search-area {
   display: flex;
-  background: #F4F4F4;
   padding: 1rem 0.5rem;
 }
 
 /*输入框*/
 .search-area input {
-  width: 70%;
+  width: 60%;
   height: 38px;
   line-height: 38px;
+  
   border: 1px solid #CCC;
-  box-shadow: inset 0 0 10px #CCC;
+  box-shadow: 3px 3px 6px 0px #CCC;
   color: #000;
   background-color: #FFF;
   border-radius: 5px;
+  margin: 0 auto;  
+  display: flex;
+  padding-left: 30rpx;
 }
 
 /*按钮*/
 .search-area button {
-  width: 30%;
+  width: 20%;
   height: 40px;
   line-height: 40px;
-  margin-left: 5px;
+  margin-left: 2rpx;
 }

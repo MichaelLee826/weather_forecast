@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="content">
-  <scroll-view scroll-y='true' enable-back-to-top='true'>
+  <scroll-view scroll-y='true' style='height:{{scroll_height}}rpx' enable-back-to-top='true' scroll-top='{{topNum}}'>
   <image class='background' src="../../pics/background.jpg" mode="aspectFill"></image>
   <!--当日天气-->
   <view class="info">
@@ -65,6 +65,12 @@
     <view>
       <view class='description'>{{xiche.des}}</view>
     </view>
+  </view>
+
+   <!--搜索-->
+  <view class='search-area'>
+    <input bindinput='inputing' placeholder='请输入城市名称' value='{{inputCity}}'></input>
+    <button type='primary' size='mini' bindtap='bindSearch'>查询</button>
   </view>
   </scroll-view>
 </view>
