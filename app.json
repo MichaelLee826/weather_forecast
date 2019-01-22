@@ -3,10 +3,17 @@
     "pages/index/index",
     "pages/logs/logs"
   ],
+
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于获取当地天气信息"
+    }
+  },
+
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#ACB4E3",
     "navigationBarTitleText": "帮你查天气",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle":"white"
   }
 }
