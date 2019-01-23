@@ -16,7 +16,7 @@ Page({
     let windowHeight = wx.getSystemInfoSync().windowHeight // 屏幕的高度
     let windowWidth = wx.getSystemInfoSync().windowWidth // 屏幕的宽度
     this.setData({
-      scroll_height: windowHeight * 750 / windowWidth - 30
+      scroll_height: windowHeight * 750 / windowWidth
     });
     this.getWeather("");
   },
@@ -66,7 +66,9 @@ Page({
       currentDate = currentDate + "  " + weekday;
 
       //返回的数据包括2部分：data.currentWeather和data.originalData.results
+      //console.log(data);
       //console.log(data.currentWeather);
+      //console.log(data.originalData);
       //console.log(data.originalData.results);
 
       //第1部分数据示例
@@ -361,6 +363,10 @@ Page({
       //风力信息中包含数字
       var pattern = new RegExp("[0-9]+");
       var res = wind.match(pattern);
+      result = res.index;
+    }
+    else if (wind.search("微风")){
+      var res = wind.match("微风");
       result = res.index;
     }
     else{
