@@ -12,7 +12,7 @@
 
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#ACB4E3",
+    "navigationBarBackgroundColor": "#301aa3",
     "navigationBarTitleText": "帮你查天气",
     "navigationBarTextStyle":"white"
   }

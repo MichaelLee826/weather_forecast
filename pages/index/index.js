@@ -61,9 +61,9 @@ Page({
       wx.hideLoading();
 
       //获取当前的日期和星期几
-      var currentDate = that.getDate();
+      var currentDate = that.getDate().substring(5);
       var weekday = data.currentWeather[0].date.substring(0, 2);
-      currentDate = currentDate + "  " + weekday;
+      //currentDate = currentDate + "  " + weekday;
 
       //返回的数据包括2部分：data.currentWeather和data.originalData.results
       //console.log(data);
@@ -173,6 +173,7 @@ Page({
         iconURL: iconURL,
         currentWeather: currentWeather,
         currentDate: currentDate,
+        weekday: weekday,
         airClass: airClass,
         airColor: airColor,
         forecast: forecast,

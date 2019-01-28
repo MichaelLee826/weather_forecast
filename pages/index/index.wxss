@@ -34,31 +34,45 @@ page{
 
 /*城市和日期显示*/
 .city {
-  position: relative;
+  width: 100%;
+  text-align: center;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+}
+
+/*周几*/
+.city .weekday {
+  float: left;
+  font-size: 30rpx;
+  font-weight: bold;
+  text-align: left;
+  padding-top: 20rpx;
+  padding-left: 30rpx;
+  width: 30%;
 }
 
 /*城市名称*/
-.cityName {
-  font-weight: bold;
-  position: relative;
-  display:inline-block;
-  margin: 15rpx 0 10rpx 0;
-  padding-left: 30rpx;
+.city .cityName {
+  display:inline;
+  font-size: 50rpx;
 }
 
 /*日期*/
-.currentDate {
-  font-weight: bold;
-  position: relative;
+.city .currentDate {
   float: right;
-  margin: 15rpx 0 10rpx 0;
-  padding-right: 30rpx
+  font-size: 30rpx;
+  font-weight: bold;
+  text-align: right;
+  padding-top: 20rpx;
+  padding-right: 30rpx;
+  width: 30%;
 }
 
 /*实时温度块*/
 .temp {
-  margin: 20rpx 5rpx 0 0;
+  margin: 20rpx 20rpx 0 0;
   text-align: center;
+  padding-bottom: 30rpx;
 }
 
 /*实时温度*/
@@ -143,7 +157,7 @@ page{
 .forecast {
   width: 100%;
   display: flex;
-  margin-top: 380rpx;
+  margin-top: 480rpx;
   align-self: flex-end;
   padding-bottom: 30rpx;
   font-weight: bold;
@@ -176,7 +190,7 @@ page{
 .date {
   margin-bottom: 20rpx;
   border-bottom: 1px solid #043567;
-  color: #F29F39;
+  color: #FFFFFF;
 }
 
 /*指数块*/
@@ -191,7 +205,8 @@ page{
 
 /*指数文字*/
 .index {
-  color: red;
+  color: #FFFFFF;
+  font-weight: bold;
   margin: 5px 0;
 }
 

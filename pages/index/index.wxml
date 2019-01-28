@@ -1,13 +1,15 @@
 <!--index.wxml-->
 <view class="content">
   <scroll-view scroll-y='true' style='height:{{scroll_height}}rpx' enable-back-to-top='true' scroll-top='{{topNum}}'>
-  <image class='background' src="../../pics/background.jpg" mode="aspectFill"></image>
+  <image class='background' src="../../pics/background2.jpg" mode="aspectFill"></image>
   <!--当日天气-->
   <view class="info">
     <view class='city'>
-	  <view class='cityName'>{{currentWeather.currentCity}}</view>
-    <view class='currentDate'>{{currentDate}}</view>
-	  </view>
+      <view class='weekday'>{{weekday}}</view>
+      <view class='cityName'>{{currentWeather.currentCity}}</view>
+      <view class='currentDate'>{{currentDate}}</view>
+    </view>
+
     <view class='temp'>
       <view class='currentTemp'>{{currentWeather.date}}</view>
       <view class = 'temp_right'>
@@ -69,7 +71,7 @@
 
    <!--搜索-->
   <view class='search-area'>
-    <input bindinput='inputing' placeholder='请输入城市名称' value='{{inputCity}}'></input>
+    <input bindinput='inputing' placeholder='查询其它城市天气' value='{{inputCity}}'></input>
     <button type='primary' size='mini' bindtap='bindSearch'>查询</button>
   </view>
   </scroll-view>
