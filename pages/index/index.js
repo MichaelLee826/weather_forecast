@@ -46,7 +46,7 @@ Page({
       //城市名称查询不到，弹窗提示
       if (statusCode == "No result available"){
         wx.showModal({
-          title: '',
+          title: '提示',
           content: '输入的城市名称有误，请重新输入',
           confirmText: '好的',
           confirmColor: '#ACB4E3',
@@ -384,12 +384,23 @@ Page({
 
   //查询按钮
   bindSearch: function () {
-    //查询天气
-    this.getWeather(this.data.inputCity);
+    if (this.data.inputCity == ''){
+      wx.showModal({
+        title: '提示',
+        content: '请先输入要查询的城市名称',
+        confirmText: '好的',
+        confirmColor: '#ACB4E3',
+        showCancel: false,
+      });
+    }
+    else {
+      //查询天气
+      this.getWeather(this.data.inputCity);
 
-    // 一键回到顶部
-    this.setData({
-      topNum: 0
-    });
+      // 一键回到顶部
+      this.setData({
+        topNum: 0
+      });
+    }
   }
 })
