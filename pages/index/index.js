@@ -5,6 +5,32 @@ const app = getApp()
 var bmap = require('../../utils/bmap-wx.js'); 
 
 Page({
+  //“分享”功能
+  onShareAppMessage: function () {
+    let that = this;
+    return {
+      title: '分享',
+      path: '/pages/index',
+      success: (res) => {
+        console.log(res.shareTickets[0])
+        wx.getShareInfo({
+          shareTicket: res.shareTickets[0],
+          success: (res) => {
+            that.setData({
+              isShow: true
+            })
+            console.log(that.setData.isShow)
+          },
+          fail: function (res) { console.log(res) },
+          complete: function (res) { console.log(res) }
+        })
+      },
+      fail: function (res) {
+        console.log(res)
+      }
+    }
+  },
+
   data: {
     currentWeather:{},
     inputCity: "",
