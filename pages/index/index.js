@@ -2,7 +2,8 @@
 //获取应用实例
 const app = getApp()
 //调用百度地图天气API的js文件
-var bmap = require('../../utils/bmap-wx.js'); 
+//2020.11.19改为新的js文件
+var bmap = require('../../utils/bmap-wx-new.js'); 
 
 Page({
   //“分享”功能
@@ -39,12 +40,49 @@ Page({
   },
   
   onLoad: function () {
+    var that = this;
     let windowHeight = wx.getSystemInfoSync().windowHeight // 屏幕的高度
     let windowWidth = wx.getSystemInfoSync().windowWidth // 屏幕的宽度
-    this.setData({
+    that.setData({
       scroll_height: windowHeight * 750 / windowWidth
     });
-    this.getWeather("");
+
+    var city = "";
+    var BMap = new bmap.BMapWX({
+      ak: 'sNrVzv0oHrkXfYyo08gUkMyQRWxzUcgU'
+    });
+    var fail = function (data) {
+      console.log(data)
+    };
+    var success = function (data) {
+      city = data.originalData.result.addressComponent.city;
+      console.log("定位城市：", city);
+      //调用查询天气函数
+      that.getWeather(city);
+    }
+    BMap.regeocoding({
+      fail: fail,
+      success: success,
+    });
+
+    //this.getWeather(city);
+
+  /**
+   * 使用微信接口进行定位
+    wx.getLocation({
+      type: 'wgs84',
+      success(res) {
+        const latitude = res.latitude
+        const longitude = res.longitude
+        const speed = res.speed
+        const accuracy = res.accuracy
+        console.log(latitude);
+        console.log(longitude);
+        console.log(speed);
+        console.log(accuracy);
+      }
+    })
+    */
   },
 
   //查询天气
@@ -69,6 +107,7 @@ Page({
       wx.hideLoading();
 
       var statusCode = data["statusCode"];
+
       //城市名称查询不到，弹窗提示
       if (statusCode == "No result available"){
         wx.showModal({
@@ -203,10 +242,11 @@ Page({
         airClass: airClass,
         airColor: airColor,
         forecast: forecast,
-        ganmao: ganmao,
-        yundong: yundong,
-        ziwaixian: ziwaixian,
-        xiche: xiche
+        //2020-11-05 现在百度返回的数据中没有生活指数了，因此不再显示
+        //ganmao: ganmao,
+        //yundong: yundong,
+        //ziwaixian: ziwaixian,
+        //xiche: xiche
       });
     }
 
