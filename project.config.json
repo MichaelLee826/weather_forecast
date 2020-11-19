@@ -13,11 +13,13 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.0.4",
 	"appid": "wx8054cb07f57187f0",
-	"projectname": "WeatherApp",
+	"projectname": "weather_forecast",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
 	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
