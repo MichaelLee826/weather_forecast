@@ -36,7 +36,8 @@ Page({
     currentWeather:{},
     inputCity: "",
     topNum: 0,
-    scroll_height: 0
+    scroll_height: 0,
+    test: ""
   },
   
   onLoad: function () {
@@ -47,24 +48,23 @@ Page({
       scroll_height: windowHeight * 750 / windowWidth
     });
 
-    var city = "";
     var BMap = new bmap.BMapWX({
       ak: 'sNrVzv0oHrkXfYyo08gUkMyQRWxzUcgU'
     });
+    
     var fail = function (data) {
       console.log(data)
     };
     var success = function (data) {
-      city = data.originalData.result.addressComponent.city;
+      var city = data.originalData.result.addressComponent.city;
       console.log("定位城市：", city);
       //调用查询天气函数
       that.getWeather(city);
-    }
-    BMap.regeocoding({
+    };
+      BMap.regeocoding({
       fail: fail,
       success: success,
     });
-
     //this.getWeather(city);
 
   /**
