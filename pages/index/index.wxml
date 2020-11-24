@@ -25,6 +25,7 @@
     <view class='air' style="background:{{airColor}}; border:{{airColor}}">{{currentWeather.pm25}}  {{airClass}}</view>
   </view>
 
+
   <!--最近3天天气-->
   <view class='forecast'>
     <view class='next-day' wx:key="{{index}}" wx:for="{{forecast}}"> 
@@ -37,8 +38,9 @@
     </view>
   </view>
 
+  <!--2020-11-05 现在百度返回的数据中没有生活指数了，因此不再显示-->
   <!--感冒指数-->
-  <view class='tips'>   
+  <!--<view class='tips'>   
     <view class='index'>感冒指数：{{ganmao.zs}}</view>
     <view>
       <view class='description'>{{ganmao.des}}</view>
@@ -46,7 +48,7 @@
   </view>
 
   <!--运动指数-->
-  <view class='tips'>   
+  <!--<view class='tips'>   
     <view class='index'>运动指数：{{yundong.zs}}</view>
     <view>
       <view class='description'>{{yundong.des}}</view>
@@ -54,7 +56,7 @@
   </view>
 
   <!--紫外线指数-->
-  <view class='tips'>   
+  <!--<view class='tips'>   
     <view class='index'>紫外线指数：{{ziwaixian.zs}}</view>
     <view>
       <view class='description'>{{ziwaixian.des}}</view>
@@ -62,7 +64,7 @@
   </view>
 
   <!--洗车指数-->
-  <view class='tips'>   
+  <!--<view class='tips'>   
     <view class='index'>洗车指数：{{xiche.zs}}</view>
     <view>
       <view class='description'>{{xiche.des}}</view>

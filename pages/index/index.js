@@ -37,7 +37,6 @@ Page({
     inputCity: "",
     topNum: 0,
     scroll_height: 0,
-    test: ""
   },
   
   onLoad: function () {

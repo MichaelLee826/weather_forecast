@@ -29,9 +29,15 @@ class BMapWX {
      */
     getWXLocation(type, success, fail, complete) {
         type = type || 'gcj02',
-        success = success || function () {};
-        fail = fail || function () {};
-        complete = complete || function () {};
+        success = success || function () {
+          console.log('定位成功');
+        };
+        fail = fail || function () {
+          console.log('定位失败');
+        };
+        complete = complete || function () {
+          console.log('定位完成');
+        };
         wx.getLocation({
             type: type,
             success: success,
@@ -304,7 +310,7 @@ class BMapWX {
         };
         let type = 'gcj02';
         let locationsuccess = function (result) {
-            //console.log("城市名称：" + param["cityName"]);
+          weatherparam["location"] = result["longitude"] + ',' + result["latitude"];
 
             /**
             * 
@@ -319,7 +325,7 @@ class BMapWX {
             else{
               weatherparam["location"] = param["cityName"];
             }
-
+            //console.log(weatherparam["location"]);
             wx.request({
                 url: 'https://api.map.baidu.com/telematics/v3/weather',
                 data: weatherparam,
@@ -328,6 +334,7 @@ class BMapWX {
                 },
                 method: 'GET',
                 success(data) {
+                    //console.log(data);
                     let res = data["data"];
                     if (res["error"] === 0 && res["status"] === 'success') {
                         let weatherArr = res["results"];

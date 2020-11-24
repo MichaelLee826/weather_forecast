@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/weather/weather",
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/test/test"
+    "pages/logs/logs"
   ],
   "permission": {
     "scope.userLocation": {
