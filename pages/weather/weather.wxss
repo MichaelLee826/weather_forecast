@@ -1,5 +1,4 @@
-/**index.wxss**/
-
+/**weather.wxss**/
 page {
   height: 100%;
 }
@@ -18,7 +17,6 @@ page {
 }
 
 /**背景图片**/
-
 .background {
   width: 100%;
   height: 100%;
@@ -28,23 +26,20 @@ page {
 }
 
 /*当日天气*/
-
 .info {
   width: 100%;
   height: 160px;
 }
 
 /*城市和日期显示*/
-
 .city {
   width: 100%;
   text-align: center;
-  padding-top: 30rpx;
+  padding-top: 20rpx;
   padding-bottom: 30rpx;
 }
 
-/*周几*/
-
+/*星期几*/
 .city .weekday {
   float: left;
   font-size: 30rpx;
@@ -56,14 +51,12 @@ page {
 }
 
 /*城市名称*/
-
 .city .cityName {
   display: inline;
   font-size: 50rpx;
 }
 
 /*日期*/
-
 .city .currentDate {
   float: right;
   font-size: 30rpx;
@@ -75,15 +68,12 @@ page {
 }
 
 /*实时温度块*/
-
 .temp {
-  margin: 20rpx 20rpx 0 0;
   text-align: center;
-  padding-bottom: 30rpx;
+  padding-bottom: 10rpx;
 }
 
 /*实时温度*/
-
 .currentTemp {
   font-size: 120rpx;
   line-height: 130rpx;
@@ -93,7 +83,6 @@ page {
 }
 
 /*实时温度右侧部分*/
-
 .temp_right {
   position: relative;
   display: inline-block;
@@ -103,7 +92,6 @@ page {
 }
 
 /*摄氏度符号*/
-
 .celsius {
   font-size: 40rpx;
   padding-top: 10rpx;
@@ -111,14 +99,12 @@ page {
 }
 
 /*实时文字*/
-
 .realtime {
   font-size: 30rpx;
   padding-top: 5rpx;
 }
 
 /**天气图标**/
-
 .weatherIcon {
   margin: 0 auto;
   display: flex;
@@ -130,15 +116,17 @@ page {
 }
 
 /*类型*/
-
 .type {
   font-weight: bold;
   text-align: center;
 }
 
-/*温度范围*/
+/*温度范围和湿度*/
 
-.tempRange {
+.tempRange_humidity {
+  width:100%;
+  display: flex;
+  justify-content: center;
   font-weight: bold;
   margin-top: 20rpx;
   text-align: center;
@@ -169,22 +157,8 @@ page {
   border-radius: 10rpx;
 }
 
-/*最近3天天气*/
-
-/*
-.forecast {
-  width: 100%;
-  display: flex;
-  margin-top: 480rpx;
-  align-self: flex-end;
-  padding-bottom: 30rpx;
-  font-weight: bold;
-}
-*/
-
-/*最近3天天气图标*/
-
-.forecastIcon {
+/*天气图标*/
+.icon {
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -193,30 +167,7 @@ page {
   height: 80rpx;
 }
 
-/*每一天的天气*/
-
-.next-day {
-  width: 30%;
-  height: 430rpx;
-  text-align: center;
-  line-height: 30px;
-  font-size: 16px;
-  margin: 0 10rpx;
-  border: 2px solid #043567;
-  border-radius: 10rpx;
-  box-shadow: 10px 10px 5px #888;
-}
-
-/*日期*/
-
-.date {
-  margin-bottom: 20rpx;
-  border-bottom: 1px solid #043567;
-  color: #fff;
-}
-
 /*指数块*/
-
 .tips {
   width: 90%;
   padding: 10rpx;
@@ -227,7 +178,6 @@ page {
 }
 
 /*指数文字*/
-
 .index {
   color: #fff;
   font-weight: bold;
@@ -235,50 +185,16 @@ page {
 }
 
 /*描述*/
-
 .description {
   line-height: 22px;
   margin: 5px 0;
 }
 
-/*搜索区域*/
-
-.search-area {
-  display: flex;
-  margin-top: 300rpx;
-  padding: 1rem 0.5rem;
-}
-
-/*输入框*/
-
-.search-area input {
-  width: 60%;
-  height: 38px;
-  line-height: 38px;
-  border: 1px solid #ccc;
-  box-shadow: 3px 3px 6px 0px #ccc;
-  color: #000;
-  background-color: #fff;
-  border-radius: 5px;
-  margin: 0 auto;
-  display: flex;
-  padding-left: 30rpx;
-}
-
-/*按钮*/
-
-.search-area button {
-  width: 20%;
-  height: 40px;
-  line-height: 40px;
-  margin-left: 2rpx;
-}
-
 /*小时预报*/
 .scroll_box {
   width: 100%;
-  height: 180rpx;
-  margin-top: 450rpx;
+  height: 190rpx;
+  margin-top: 400rpx;
   overflow: hidden;
   padding-top: 10rpx;
   padding-left: 10rpx;
@@ -289,7 +205,6 @@ page {
 }
 
 /*小时预报*/
-
 .scroll_box scroll-view {
   height: 100%;
   width: 100%;
@@ -297,7 +212,6 @@ page {
 }
 
 /*小时预报*/
-
 .item_list {
   width: 150rpx;
   height: 100%;
@@ -316,10 +230,72 @@ page {
   font-weight: bold
 }
 
+/*未来6天预报*/
 .item {
   width: 690rpx;
   height: 80rpx;
   padding-left: 30rpx;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+/*未来6天预报*/
+.forecastWeek{
+  width: 30%;
+}
+
+/*未来6天预报*/
+.forecastIcon{
+  width: 13%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  height: 80rpx;
+}
+
+/*未来6天预报*/
+.forecastTemp{
+  width: 30%;
+  text-align: right;
+}
+
+/*搜索区域*/
+.search-area {
+  display: flex;
+  margin-top: 250rpx;
+  padding: 2rem 0.5rem;
+}
+
+/*输入框*/
+.search-area input {
+  width: 50%;
+  height: 38px;
+  line-height: 38px;
+  border: 1px solid #ccc;
+  box-shadow: 3px 3px 6px 0px #ccc;
+  color: #000;
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 0 auto;
+  display: flex;
+  padding-left: 10rpx;
+}
+
+/*按钮*/
+.search-area button {
+  width: 20%;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 2rpx;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/*隐藏滚动条*/
+::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  color: transparent;
 }

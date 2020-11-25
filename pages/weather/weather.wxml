@@ -14,13 +14,13 @@
         <view class='currentTemp'>{{todayInfo.currentTemp}}</view>
         <view class='temp_right'>
           <view class='celsius'>℃</view>
-          <view class='realtime'>(实时)</view>
+         <!-- <view class='realtime'>(实时)</view>-->
         </view>
       </view>
 
       <image class='weatherIcon' src='{{iconURL}}' mode="Widthfix"></image>
       <view class='type'>{{todayInfo.weatherDesc}}</view>
-      <view class='tempRange'>{{todayInfo.temperatureRange}}</view>
+      <text class='tempRange_humidity' space="ensp">{{todayInfo.temperatureRange_humidity}}</text>
       <view class='wind'>{{todayInfo.wind}}</view>
       <view class='air' style="background:{{airColor}}; border:{{airColor}}">{{todayInfo.pm25}} {{airClass}}</view>
     </view>
@@ -30,20 +30,18 @@
       <scroll-view scroll-x="true" scroll-with-animation="true">
         <view class="item_list" wx:key="{{index}}" wx:for="{{hoursForecast}}">
           <view class='detail'>{{item.day}}</view>
-          <image class='forecastIcon' src='{{item.wea}}' mode="Widthfix"></image>
+          <image class='icon' src='{{item.wea}}' mode="Widthfix"></image>
           <view class='detail'>{{item.tem}}</view>
         </view>
       </scroll-view>
     </view>
 
-    
-
      <!--未来6天预报-->
     <view class="forecast">
       <view class="item" wx:key="{{index}}" wx:for="{{forecast}}">
-          <view class='detail'>{{item.week}}</view>
+          <view class='forecastWeek'>{{item.week}}</view>
           <image class='forecastIcon' src='{{item.wea}}' mode="Widthfix"></image>
-          <view class='detail'>{{item.tem}}</view>
+          <view class='forecastTemp'>{{item.tem}}</view>
         </view>
     </view>
 
@@ -51,6 +49,7 @@
     <view class='search-area'>
       <input bindinput='inputing' placeholder='查询其它城市天气' value='{{inputCity}}'></input>
       <button type='primary' size='mini' bindtap='bindSearch'>查询</button>
+      <button type='primary' size='mini' bindtap='bindReset'>重新定位</button>
     </view>
 
   </scroll-view>
