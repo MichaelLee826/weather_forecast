@@ -1,11 +1,14 @@
-// pages/test/test.js
-//在onLoad中定位当前城市，然后通过getWeather(city)查询今日天气，通过getForecast(city)查询小时和未来天气
+// pages/weather/weather.js
+
+/*
+*在onLoad中定位当前城市，通过getForecast(city)查询今天、小时、未来6天的天气
+*/
 
 //获取应用实例
 const app = getApp()
 //调用百度地图天气API的js文件
 var bmap = require('../../utils/bmap-wx-new.js');
-
+//调用util里的时间格式化方法
 var util = require('../../utils/util.js');
 
 Page({
@@ -43,11 +46,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    currentWeather: {},
+    //currentWeather: {},
     inputCity: "",
     topNum: 0,
     scroll_height: 0,
-    todayInfo: {}
+    todayInfo: {},
   },
 
   /**
@@ -73,10 +76,10 @@ Page({
       var city = data.originalData.result.addressComponent.city;
       //城市名称不能带“市”
       city = city.substring(0, city.length - 1);
-      console.log("定位城市：", city);
+      //console.log("定位城市：", city);
 
       //调用查询天气函数
-      //that.getWeather(city);
+      that.getWeather(city);
       that.getForecast(city);
     };
     BMap.regeocoding({
@@ -85,7 +88,7 @@ Page({
     });
   },
 
-
+  
   //获得当天信息
   getWeather: function(cityName) {
     var that = this;
@@ -153,11 +156,16 @@ Page({
         todayInfo.date = that.getFormattedDate(currentDate);
         todayInfo.week = that.getFormattedWeek(weekday);
         todayInfo.currentTemp = data.data.tem;
-        todayInfo.temperatureRange_humidity = "最低" + lowTemp + "℃  " + "最高" + highTemp + "℃  " + "湿度" + humidity;
+        //todayInfo.temperatureRange_humidity = "最低" + lowTemp + "℃  " + "最高" + highTemp + "℃  " + "湿度" + humidity;
+        todayInfo.temperatureRange_humidity = lowTemp + '~' + highTemp + '℃     ' + humidity;
         todayInfo.weatherDesc = data.data.wea;
         todayInfo.wind = that.getWind(win, win_speed);
         todayInfo.pm25 = pm25;
         todayInfo.update_time = data.data.update_time.substring(11, 19);
+
+        //以下两个是全局变量，在app.js中声明
+        app.globalData.currentWeather = todayInfo.currentTemp;
+        app.globalData.currentWea = todayInfo.weatherDesc;
 
         that.setData({
           todayInfo: todayInfo,
@@ -172,9 +180,9 @@ Page({
       }
     });
   },
+  
 
-
-  //获得未来6天的天气
+  //获得今天、小时、未来6天的天气
   getForecast: function(cityName) {
     //提示“加载中”
     wx.showToast({
@@ -185,7 +193,8 @@ Page({
 
     var that = this;
 
-    //version=v6&appid=84411527&appsecret=G2CNv72f
+    //天气API的查询参数
+    //version=v1&appid=84411527&appsecret=G2CNv72f
     let weatherparam = {
       version: 'v1',
       city: cityName,
@@ -208,16 +217,17 @@ Page({
         //关闭加载提示框
         wx.hideLoading();
 
+        /*
         //1、解析今日天气数据
-        var currentDate = data.data.data[0].date.substring(5, 10); //2020-11-21
-        var weekday = data.data.data[0].week; //星期六
-        var currentTemp = data.data.data[0].tem;
-        var highTemp = data.data.data[0].tem1;
-        var lowTemp = data.data.data[0].tem2;
-        var humidity = data.data.data[0].humidity;
-        var iconURL = that.getIconURL(data.data.data[0].wea);
-        var win = data.data.data[0].win[0];
-        var win_speed = data.data.data[0].win_speed;
+        var currentDate = data.data.data[0].date.substring(5, 10);    //2020-11-21
+        var weekday = data.data.data[0].week;                         //星期六
+        var currentTemp = data.data.data[0].tem;                      //实时温度
+        var highTemp = data.data.data[0].tem1;                        //高温
+        var lowTemp = data.data.data[0].tem2;                         //低温
+        var humidity = data.data.data[0].humidity;                    //湿度
+        var iconURL = that.getIconURL(data.data.data[0].wea);         //天气图标
+        var win = data.data.data[0].win[0];                           //风向
+        var win_speed = data.data.data[0].win_speed;                  //风力
         //判断空气质量等级
         var pm25 = data.data.data[0].air;
         var airClass = data.data.data[0].air_level;
@@ -241,31 +251,35 @@ Page({
         todayInfo.date = that.getFormattedDate(currentDate);
         todayInfo.week = that.getFormattedWeek(weekday);
         todayInfo.currentTemp = currentTemp.substring(0, currentTemp.length - 1);
-        todayInfo.temperatureRange_humidity = "最低" + lowTemp + "  " + "最高" + highTemp + "  " + "湿度" + humidity + "%";
+        //todayInfo.temperatureRange_humidity = "最低" + lowTemp + "  " + "最高" + highTemp + "  " + "湿度" + humidity + "%";
+        todayInfo.temperatureRange_humidity = lowTemp.substring(0, lowTemp.length - 1) + '~' + highTemp + '     ' + humidity + "%";
         todayInfo.weatherDesc = data.data.data[0].wea;
         todayInfo.wind = that.getWind(win, win_speed);
         todayInfo.pm25 = pm25;
         todayInfo.update_time = data.data.update_time.substring(11, 19);
+        */
 
         //2、解析小时天气数据
         //当前时间
         var time = util.formatTime(new Date());
-        var currentDate = time.substring(8, 10);
-        var currentHour = time.substring(11, 13);
+        var currentDate = time.substring(8, 10);    //日
+        var currentHour = time.substring(11, 13);   //小时
 
+        //通过JSON数组存储各小时的天气信息
         var hoursForecast = [];
         var jsonObj = {};
         jsonObj["day"] = "现在";
-        jsonObj["wea"] = that.getIconURL(todayInfo.weatherDesc);
-        jsonObj["tem"] = todayInfo.currentTemp + "℃";
+        jsonObj["wea"] = that.getIconURL(app.globalData.currentWea);
+        console.log(app.globalData.currentWea);
+        jsonObj["tem"] = app.globalData.currentWeather + "℃";
         hoursForecast.push(jsonObj);
 
         //获得今天小时预报
         for (var i = 0; i < data.data.data[0].hours.length; i++) {
-          //大于当前小时才显示
+          //只有大于当前小时才显示
           if (parseInt(data.data.data[0].hours[i].day.substring(3, 5)) > parseInt(currentHour)) {
             var jsonObj = {};
-            jsonObj["day"] = data.data.data[0].hours[i].day;
+            jsonObj["day"] = data.data.data[0].hours[i].day.substring(3, 6);
             jsonObj["wea"] = that.getIconURL(data.data.data[0].hours[i].wea);
             jsonObj["tem"] = data.data.data[0].hours[i].tem;
             hoursForecast.push(jsonObj);
@@ -274,7 +288,7 @@ Page({
         //明天的小时预报
         for (var i = 0; i < data.data.data[1].hours.length; i++) {
           var jsonObj = {};
-          jsonObj["day"] = data.data.data[1].hours[i].day;
+          jsonObj["day"] = data.data.data[1].hours[i].day.substring(3, 6);
           jsonObj["wea"] = that.getIconURL(data.data.data[1].hours[i].wea);
           jsonObj["tem"] = data.data.data[1].hours[i].tem;
           hoursForecast.push(jsonObj);
@@ -289,11 +303,11 @@ Page({
         }
 
         that.setData({
-          todayInfo: todayInfo,
-          cityName: cityName,
-          iconURL: iconURL,
-          airClass: airClass,
-          airColor: airColor,
+          //todayInfo: todayInfo,
+          //cityName: cityName,
+          //iconURL: iconURL,
+          //airClass: airClass,
+          //airColor: airColor,
           hoursForecast: hoursForecast,
           forecast: forecast,
         });
@@ -313,7 +327,7 @@ Page({
     return today;
   },
 
-  //格式化周几
+  //格式化星期几
   getFormattedWeek: function(week) {
     var week = "星期" + week.substring(2, 3);
     return week;
@@ -409,6 +423,7 @@ Page({
     }
   },
 
+  //重置按钮
   bindReset: function() {
     this.onLoad();
 

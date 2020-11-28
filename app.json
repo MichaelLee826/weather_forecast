@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/weather_forecast/weather_forecast",
     "pages/weather/weather",
     "pages/index/index",
     "pages/logs/logs"
@@ -13,7 +14,8 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#301aa3",
     "navigationBarTitleText": "帮你查天气",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom"
   },
   "sitemapLocation": "sitemap.json"
 }

@@ -1,0 +1,68 @@
+<!--index.wxml-->
+<view class="content">
+  <scroll-view scroll-y='true' style='height:{{scroll_height}}rpx' enable-back-to-top='true' scroll-top='{{topNum}}'>
+    <image class='background' src="{{background_src}}" mode="aspectFill"></image>
+
+    <!--今日天气-->
+    <view class="info">
+      <view class='city'>
+        <view class='weekday'>{{todayInfo.week}}</view>
+        <view class='cityName'>{{cityName}}</view>
+        <view class='currentDate'>{{todayInfo.date}}</view>
+      </view>
+
+      <view class='temp'>
+        <view class='currentTemp'>{{todayInfo.currentTemp}}</view>
+        <view class='temp_right'>
+          <view class='celsius'>℃</view>
+        </view>
+      </view>
+
+      <image class='weatherIcon' src='{{todayInfo.iconURL}}' mode="Widthfix"></image>
+      <text class='type_feelsLike' space="ensp">{{todayInfo.type_feelsLike}}</text>
+      <text class='tempRange_humidity' space="ensp">{{temperatureRange_humidity}}</text>
+      <view class='wind'>{{todayInfo.wind}}</view>
+
+      <view class="sun">
+        <view class="sunrise">
+          <image class='icon' src='../../pics/sunrise.png' mode="Widthfix"></image>
+          <view class='type' space="ensp">{{sunrise}}</view>
+        </view>
+        <view class='air' style="background:{{airColor}}; border:{{airColor}}">{{aqi}} {{airClass}}</view>
+        <view class="sunset">
+          <view class='type' space="ensp">{{sunset}}</view>
+          <image class='icon' src='../../pics/sunset.png' mode="Widthfix"></image>
+        </view>
+      </view>
+    </view>
+
+    <!--小时预报-->
+    <view class="scroll_box">
+      <scroll-view scroll-x="true" scroll-with-animation="true">
+        <view class="item_list" wx:key="{{index}}" wx:for="{{hoursForecast}}">
+          <view class='detail'>{{item.hour}}</view>
+          <image class='icon' src='{{item.wea}}' mode="Widthfix"></image>
+          <view class='detail'>{{item.tem}}</view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!--未来6天预报-->
+    <view class="forecast">
+      <view class="item" wx:key="{{index}}" wx:for="{{daysForecast}}">
+        <view class='forecastWeek'>{{item.week}}</view>
+        <image class='forecastIcon' src='{{item.wea}}' mode="Widthfix"></image>
+        <view class="forecastDesc">{{item.desc}}</view>
+        <view class='forecastTemp'>{{item.tem}}</view>
+      </view>
+    </view>
+
+    <!--搜索-->
+    <view class='search-area'>
+      <input bindinput='inputing' placeholder='查询其它城市天气' value='{{inputCity}}'></input>
+      <button type='primary' size='mini' bindtap='bindSearch'>查询</button>
+      <button type='primary' size='mini' bindtap='bindReset'>重置</button>
+    </view>
+
+  </scroll-view>
+</view>
