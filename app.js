@@ -37,5 +37,6 @@ App({
     userInfo: null,
     currentWeather: "",
     currentWea: "",
+    currentIcon: "",
   }
 })

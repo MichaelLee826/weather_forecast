@@ -172,6 +172,7 @@ page {
   display: flex;
   align-items: flex-end;
   padding-left: 30rpx;
+  font-weight: bold;
 }
 
 /*空气质量*/
@@ -194,13 +195,14 @@ page {
   display: flex;
   align-items: flex-end;
   padding-right: 30rpx;
+  font-weight: bold;
 }
 
 /*小时预报*/
 .scroll_box {
   width: 100%;
   height: 190rpx;
-  margin-top: 550rpx;
+  margin-top: 570rpx;
   overflow: hidden;
   padding-top: 10rpx;
   padding-left: 10rpx;

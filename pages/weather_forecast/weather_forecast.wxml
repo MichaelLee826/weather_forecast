@@ -18,7 +18,7 @@
         </view>
       </view>
 
-      <image class='weatherIcon' src='{{todayInfo.iconURL}}' mode="Widthfix"></image>
+       <image class='weatherIcon' src='{{todayInfo.iconURL}}' mode="Widthfix"></image>
       <text class='type_feelsLike' space="ensp">{{todayInfo.type_feelsLike}}</text>
       <text class='tempRange_humidity' space="ensp">{{temperatureRange_humidity}}</text>
       <view class='wind'>{{todayInfo.wind}}</view>

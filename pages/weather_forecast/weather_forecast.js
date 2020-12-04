@@ -46,7 +46,7 @@ Page({
     topNum: 0,
     scroll_height: 0,
     todayInfo: {},
-    background_src: "../../pics/background_day.jpg",
+    background_src: "../../pics/background/background_day.jpg",
   },
 
   /**
@@ -117,7 +117,7 @@ Page({
 
       //查询成功
       success(data) {
-        //console.log("今日天气", data);
+        console.log("今日天气", data);
         //关闭加载提示框
         wx.hideLoading();
 
@@ -126,7 +126,8 @@ Page({
         var currentDate = date.substring(5, 7) + "月" + date.substring(8, 10) + "日";
         var weekday = util.getWeekByDate(date.substring(0, 10));
         var currentTemp = data.data.now.temp;
-        var iconURL = that.getIconURL(data.data.now.text);
+        //var iconURL = that.getIconURL(data.data.now.text);
+        var iconURL = "../../pics/icon/" + data.data.now.icon + ".png";
         var weatherDesc = data.data.now.text;
         var feelsLike = data.data.now.feelsLike;
         var win = data.data.now.windDir;
@@ -141,9 +142,10 @@ Page({
         todayInfo.type_feelsLike = '体感：' + feelsLike + "℃    " + weatherDesc;
         todayInfo.wind = win + win_speed;
         
-        //以下两个是全局变量，在app.js中声明
+        //以下三个是全局变量，在app.js中声明
         app.globalData.currentWeather = currentTemp;
         app.globalData.currentWea = weatherDesc;
+        app.globalData.currentIcon = iconURL;
 
         //3、查询逐小时预报
         //这里是为了确保得到currentTemp和weatherDesc后，再进行查询
@@ -230,12 +232,13 @@ Page({
 
       //查询成功
       success(data) {
-        //console.log("未来24小时天气", data);
+        console.log("未来24小时天气", data);
         //通过JSON数组存储各小时的天气信息
         var hoursForecast = [];
         var jsonObj = {};
         jsonObj["hour"] = "现在";
-        jsonObj["wea"] = that.getIconURL(app.globalData.currentWea);
+        //jsonObj["wea"] = that.getIconURL(app.globalData.currentWea);
+        jsonObj["wea"] = app.globalData.currentIcon;
         jsonObj["tem"] = app.globalData.currentWeather + "℃";
         hoursForecast.push(jsonObj);
 
@@ -243,7 +246,8 @@ Page({
         for (var i = 0; i < data.data.hourly.length; i++) {
           var jsonObj = {};
           jsonObj["hour"] = data.data.hourly[i].fxTime.substring(11, 13) + "时";
-          jsonObj["wea"] = that.getIconURL(data.data.hourly[i].text);
+          //jsonObj["wea"] = that.getIconURL(data.data.hourly[i].text);
+          jsonObj["wea"] = "../../pics/icon/" + data.data.hourly[i].icon + ".png";
           jsonObj["tem"] = data.data.hourly[i].temp + "℃";
           hoursForecast.push(jsonObj);
         }
@@ -277,7 +281,7 @@ Page({
 
         //查询成功
         success(data) {
-          //console.log("未来6天天气", data);
+          console.log("未来6天天气", data);
           //今日的温度范围、湿度、日出日落
           var lowTemp = data.data.daily[0].tempMin;
           var highTemp = data.data.daily[0].tempMax;
@@ -293,10 +297,10 @@ Page({
           var current_time = new Date().getTime();
           var background_src = "";
           if(current_time > sunrise_time && current_time < sunset_time){
-            background_src = "../../pics/background_day.jpg";
+            background_src = "../../pics/background/background_day.jpg";
           }
           else{
-            background_src = "../../pics/background_night.jpg";
+            background_src = "../../pics/background/background_night.jpg";
           }
 
           //通过JSON数组存储未来6天的天气信息
@@ -305,7 +309,8 @@ Page({
           for (var i = 1; i < data.data.daily.length; i++) {
             var jsonObj = {};
             jsonObj["week"] = util.getWeekByDate(data.data.daily[i].fxDate);
-            jsonObj["wea"] = that.getIconURL(data.data.daily[i].textDay);
+            //jsonObj["wea"] = that.getIconURL(data.data.daily[i].textDay);
+            jsonObj["wea"] = "../../pics/icon/" + data.data.daily[i].iconDay + ".png";
             jsonObj["desc"] = data.data.daily[i].textDay;
             jsonObj["tem"] = data.data.daily[i].tempMin + "~" + data.data.daily[i].tempMax + "℃";
             daysForecast.push(jsonObj);
