@@ -46,6 +46,9 @@ Page({
     topNum: 0,
     scroll_height: 0,
     todayInfo: {},
+    airColor: "#ffffff00",
+    displayCondition: true,   //初始化时隐藏某些控件，数据加载完再显示
+    condition: false,
     background_src: "../../pics/background/background_day.jpg",
   },
 
@@ -67,7 +70,15 @@ Page({
 
     var fail = function (data) {
       console.log(data)
+      wx.showModal({
+        title: '网络错误',
+        content: '请检查网络情况',
+        confirmText: '好的',
+        confirmColor: '#ACB4E3',
+        showCancel: false,
+      });
     };
+    
     //定位成功
     var success = function (data) {
       //城市
@@ -94,12 +105,11 @@ Page({
   //1、查询今日天气
   getWeather: function (city, longtitude, latitude) {
     //提示“加载中”
-    wx.showToast({
+    wx.showLoading({
       title: '加载中',
-      icon: 'loading',
       mask: true
-    });
-
+    })
+    
     var that = this;
     var location = longtitude + "," + latitude;
     let weatherparam = {
@@ -117,10 +127,7 @@ Page({
 
       //查询成功
       success(data) {
-        console.log("今日天气", data);
-        //关闭加载提示框
-        wx.hideLoading();
-
+        //console.log("今日天气", data);
         //解析数据
         var date = util.formatTime(new Date());
         var currentDate = date.substring(5, 7) + "月" + date.substring(8, 10) + "日";
@@ -139,7 +146,8 @@ Page({
         todayInfo.week = weekday;
         todayInfo.currentTemp = currentTemp;
         todayInfo.iconURL = iconURL;
-        todayInfo.type_feelsLike = '体感：' + feelsLike + "℃    " + weatherDesc;
+        todayInfo.type = weatherDesc;
+        todayInfo.feelsLike = '体感温度：' + feelsLike + "℃" ;
         todayInfo.wind = win + win_speed;
         
         //以下三个是全局变量，在app.js中声明
@@ -155,7 +163,13 @@ Page({
           todayInfo: todayInfo,
           cityName: city,
           iconURL: iconURL,
+          celsius: "℃",
+          displayCondition: false,
+          condition:true,
         });
+
+        //关闭加载提示框
+        wx.hideLoading();
       },
       fail(data) {
         console.log("失败", data);
@@ -232,7 +246,7 @@ Page({
 
       //查询成功
       success(data) {
-        console.log("未来24小时天气", data);
+        //console.log("未来24小时天气", data);
         //通过JSON数组存储各小时的天气信息
         var hoursForecast = [];
         var jsonObj = {};
@@ -281,19 +295,23 @@ Page({
 
         //查询成功
         success(data) {
-          console.log("未来6天天气", data);
+          //console.log("未来6天天气", data);
           //今日的温度范围、湿度、日出日落
           var lowTemp = data.data.daily[0].tempMin;
           var highTemp = data.data.daily[0].tempMax;
           var humidity = data.data.daily[0].humidity;
-          var temperatureRange_humidity = lowTemp + '~' + highTemp + '℃     ' + humidity + "%";
+          //var temperatureRange_humidity = lowTemp + '~' + highTemp + '℃     ' + humidity + "%";
+          var temperatureRange = lowTemp + '~' + highTemp + '℃';
+          var humidity = humidity + "%";
           var sunrise = data.data.daily[0].sunrise;
           var sunset = data.data.daily[0].sunset;
 
           //根据日出日落时间切换背景图片
           var date = util.formatTime(new Date()).substring(0, 10);
-          var sunrise_time = new Date(date + ' ' + sunrise).getTime();
-          var sunset_time = new Date(date + ' ' + sunset).getTime();
+          //需要把日期中的-换成/，否则iOS无法识别
+          date = date.replace(/-/g, '/');
+          var sunrise_time = new Date(date + ' ' + sunrise + ":00").getTime();
+          var sunset_time = new Date(date + ' ' + sunset + ":00").getTime();
           var current_time = new Date().getTime();
           var background_src = "";
           if(current_time > sunrise_time && current_time < sunset_time){
@@ -317,7 +335,8 @@ Page({
           }
 
           that.setData({
-            temperatureRange_humidity: temperatureRange_humidity,
+            temperatureRange: temperatureRange,
+            humidity: humidity,
             sunrise: sunrise,
             sunset: sunset,
             background_src: background_src,

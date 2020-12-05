@@ -1,4 +1,5 @@
 /**weather.wxss**/
+
 page {
   height: 100%;
 }
@@ -17,6 +18,7 @@ page {
 }
 
 /**背景图片**/
+
 .background {
   width: 100%;
   height: 100%;
@@ -26,13 +28,16 @@ page {
 }
 
 /*当日天气*/
+
 .info {
   width: 100%;
   height: 160px;
 }
 
 /*城市和日期显示*/
+
 /*隐藏顶部的navigationBar后，需调整padding-top的值*/
+
 .city {
   width: 100%;
   text-align: center;
@@ -41,6 +46,7 @@ page {
 }
 
 /*星期几*/
+
 .city .weekday {
   float: left;
   font-size: 30rpx;
@@ -52,12 +58,14 @@ page {
 }
 
 /*城市名称*/
+
 .city .cityName {
   display: inline;
   font-size: 50rpx;
 }
 
 /*日期*/
+
 .city .currentDate {
   float: right;
   font-size: 30rpx;
@@ -69,12 +77,14 @@ page {
 }
 
 /*实时温度块*/
+
 .temp {
   text-align: center;
   padding-bottom: 10rpx;
 }
 
 /*实时温度*/
+
 .currentTemp {
   font-size: 120rpx;
   line-height: 130rpx;
@@ -84,6 +94,7 @@ page {
 }
 
 /*实时温度右侧部分*/
+
 .temp_right {
   position: relative;
   display: inline-block;
@@ -93,6 +104,7 @@ page {
 }
 
 /*摄氏度符号*/
+
 .celsius {
   font-size: 40rpx;
   padding-top: 10rpx;
@@ -100,12 +112,14 @@ page {
 }
 
 /*体感温度*/
+
 .realtime {
   font-size: 30rpx;
   padding-top: 15rpx;
 }
 
 /**天气图标**/
+
 .weatherIcon {
   margin: 0 auto;
   display: flex;
@@ -116,9 +130,10 @@ page {
   border-radius: 50%;
 }
 
-/*体感温度和天气类型*/
-.type_feelsLike {
-  width:100%;
+/*天气类型*/
+
+.type {
+  width: 100%;
   display: flex;
   justify-content: center;
   font-weight: bold;
@@ -126,40 +141,111 @@ page {
   text-align: center;
 }
 
-/*温度范围和湿度*/
+/*体感温度*/
 
-.tempRange_humidity {
-  width:100%;
+.feelsLike {
+  width: 100%;
   display: flex;
   justify-content: center;
   font-weight: bold;
   margin-top: 20rpx;
   text-align: center;
-  padding-top: 5rpx;
+}
+
+/*温度范围和湿度*/
+
+.tempRange_humidity_view {
+  width: 100%;
+  height: 90rpx;
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+/*温度范围*/
+
+.tempRange {
+  height: 90rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20rpx;
+}
+
+/*湿度*/
+
+.humidity {
+  height: 90rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20rpx;
+}
+
+/*温度范围文字*/
+
+.tempRange_text {
+  margin-left: 5rpx;
+  margin-right: 5rpx;
+  font-weight: bold;
+  text-align: center;
+}
+
+/*湿度文字*/
+
+.humidity_text {
+  margin-left: 15rpx;
+  margin-right: 5rpx;
+  font-weight: bold;
+  text-align: center;
 }
 
 /*风向风速*/
 
-.wind {
-  font-weight: bold;
-  margin-top: 20rpx;
-  margin-bottom: 10rpx;
-  text-align: center;
-  padding-top: 5rpx;
+.wind_view {
+  width: 100%;
+  height: 90rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
 }
 
-/*天气图标*/
-.icon {
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
+/*风向风速图标*/
+
+.wind_icon {
   width: 80rpx;
   height: 80rpx;
 }
 
+/*风向风速文字*/
+
+.wind_text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  text-align: center;
+  padding-left: 30rpx;
+}
+
+/*天气图标*/
+
+.icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
 /*日出日落*/
-.sun{
+
+.sun {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -168,7 +254,8 @@ page {
 }
 
 /*日出*/
-.sunrise{
+
+.sunrise {
   display: flex;
   align-items: flex-end;
   padding-left: 30rpx;
@@ -191,7 +278,8 @@ page {
 }
 
 /*日落*/
-.sunset{
+
+.sunset {
   display: flex;
   align-items: flex-end;
   padding-right: 30rpx;
@@ -199,10 +287,11 @@ page {
 }
 
 /*小时预报*/
+
 .scroll_box {
   width: 100%;
   height: 190rpx;
-  margin-top: 570rpx;
+  margin-top: 670rpx;
   overflow: hidden;
   padding-top: 10rpx;
   padding-left: 10rpx;
@@ -213,6 +302,7 @@ page {
 }
 
 /*小时预报*/
+
 .scroll_box scroll-view {
   height: 100%;
   width: 100%;
@@ -220,6 +310,7 @@ page {
 }
 
 /*小时预报*/
+
 .item_list {
   width: 110rpx;
   height: 100%;
@@ -231,14 +322,16 @@ page {
 }
 
 /*未来6天预报*/
+
 .forecast {
   width: 100%;
   height: 200rpx;
   margin-top: 30rpx;
-  font-weight: bold
+  font-weight: bold;
 }
 
 /*未来6天预报*/
+
 .item {
   width: 690rpx;
   height: 80rpx;
@@ -249,12 +342,14 @@ page {
 }
 
 /*未来6天预报*/
-.forecastWeek{
+
+.forecastWeek {
   width: 30%;
 }
 
 /*未来6天预报*/
-.forecastIcon{
+
+.forecastIcon {
   width: 13%;
   margin: 0 auto;
   display: flex;
@@ -264,18 +359,21 @@ page {
 }
 
 /*未来6天预报*/
-.forecastDesc{
+
+.forecastDesc {
   width: 10%;
   text-align: center;
 }
 
 /*未来6天预报*/
-.forecastTemp{
+
+.forecastTemp {
   width: 35%;
   text-align: right;
 }
 
 /*搜索区域*/
+
 .search-area {
   display: flex;
   margin-top: 250rpx;
@@ -283,6 +381,7 @@ page {
 }
 
 /*输入框*/
+
 .search-area input {
   width: 50%;
   height: 38px;
@@ -298,6 +397,7 @@ page {
 }
 
 /*按钮*/
+
 .search-area button {
   width: 20%;
   height: 40px;
@@ -308,7 +408,8 @@ page {
 }
 
 /*隐藏滚动条*/
-::-webkit-scrollbar{
+
+::-webkit-scrollbar {
   width: 0;
   height: 0;
   color: transparent;
